@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
+import { FC, forwardRef, useState } from "react";
+import { IconEye, IconEyeOff, IconLock } from "@tabler/icons-react";
 import { Generic } from "./Generic";
 import type { TextFieldProps } from "./TextField.d";
-import { IconEye, IconEyeOff, IconLock } from "@tabler/icons-react";
 
-export const Password: FC<TextFieldProps> = (props = {}) => {
+export const Password: FC<TextFieldProps> = forwardRef((props = {}, ref) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -17,7 +17,8 @@ export const Password: FC<TextFieldProps> = (props = {}) => {
         onClick: () => setShowPassword((state) => !state),
       }}
       {...props}
+      ref={ref}
       type={showPassword ? "text" : "password"}
     />
   );
-};
+});

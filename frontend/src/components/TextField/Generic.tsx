@@ -1,14 +1,19 @@
-import { FC, FocusEvent, useState } from "react";
+import { FC, FocusEvent, forwardRef, useState } from "react";
 import {
+  Box,
+  Flex,
   Input,
   InputGroup,
   InputLeftElement,
   InputProps,
   InputRightElement,
+  Text,
 } from "@chakra-ui/react";
+import { IconExclamationCircle } from "@tabler/icons-react";
+import { Icon } from "@chakra-ui/react";
 import { TextFieldProps } from "./TextField.d";
 
-export const Generic: FC<TextFieldProps> = (props) => {
+export const Generic: FC<TextFieldProps> = forwardRef((props, ref) => {
   const [colorIcon, setColorIcon] = useState("#718096");
 
   const {
@@ -22,6 +27,7 @@ export const Generic: FC<TextFieldProps> = (props) => {
     sx: sxRaw = {},
     onFocus,
     onBlur,
+    helperText,
     ...rest
   } = props;
 
@@ -94,18 +100,42 @@ export const Generic: FC<TextFieldProps> = (props) => {
   };
 
   return (
-    <InputGroup>
-      {!!StartIcon && (
-        <InputLeftElement width="auto" {...startElementProps}>
-          <StartIcon {...startIconProps} color={colorIcon} />
-        </InputLeftElement>
+    <Box width="full">
+      <InputGroup>
+        {!!StartIcon && (
+          <InputLeftElement width="auto" {...startElementProps}>
+            <StartIcon {...startIconProps} color={colorIcon} />
+          </InputLeftElement>
+        )}
+        <Input
+          {...inputProps}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
+          ref={ref}
+          focusBorderColor={props.isInvalid ? "red.500" : undefined}
+        />
+        {!!EndIcon && (
+          <InputRightElement width="auto" {...endElementProps}>
+            <EndIcon {...endIconProps} color={colorIcon} />
+          </InputRightElement>
+        )}
+      </InputGroup>
+      {!!helperText && (
+        <Flex justifyContent="flex-start" alignItems="flex-start" mt="6px">
+          {!!props.isInvalid && (
+            <Box pt="1px" mr={2}>
+              <Icon as={IconExclamationCircle} boxSize={4} color="red.500" />
+            </Box>
+          )}
+          <Text
+            as="div"
+            fontSize="13px"
+            color={props.isInvalid ? "red.500" : undefined}
+          >
+            {helperText}
+          </Text>
+        </Flex>
       )}
-      <Input {...inputProps} onFocus={handleOnFocus} onBlur={handleOnBlur} />
-      {!!EndIcon && (
-        <InputRightElement width="auto" {...endElementProps}>
-          <EndIcon {...endIconProps} color={colorIcon} />
-        </InputRightElement>
-      )}
-    </InputGroup>
+    </Box>
   );
-};
+});

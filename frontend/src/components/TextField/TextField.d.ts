@@ -10,4 +10,6 @@ export interface TextFieldProps extends InputProps {
   endIconProps?: IconProps;
   endElementProps?: InputElementProps;
   error?: boolean;
+  ref?: Ref<InputProps>;
+  helperText?: string;
 }
