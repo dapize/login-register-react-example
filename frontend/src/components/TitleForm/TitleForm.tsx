@@ -1,8 +1,7 @@
+import { FC, ReactNode } from "react";
 import { Text } from "@chakra-ui/react";
-import { FC } from "react";
-import { TitleFormProps } from "./TitleForm.d";
 
-export const TitleForm: FC<TitleFormProps> = ({ children, lineWidth }) => {
+export const TitleForm: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Text
       as="h2"
@@ -12,7 +11,7 @@ export const TitleForm: FC<TitleFormProps> = ({ children, lineWidth }) => {
       _after={{
         content: '""',
         display: "block",
-        width: lineWidth,
+        width: 30,
         height: "3px",
         backgroundColor: "#4070F4",
       }}

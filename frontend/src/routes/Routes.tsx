@@ -5,6 +5,7 @@ import { Contact } from "@pages/Contact";
 import { Profile } from "@pages/Profile";
 import { NotFound } from "@pages/NotFound";
 import { Login } from "@pages/Login";
+import { Register } from "@pages/Register";
 import { About } from "@pages/About";
 import { Private } from "./Private";
 
@@ -22,6 +23,7 @@ export const Routers = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

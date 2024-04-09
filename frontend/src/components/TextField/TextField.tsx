@@ -2,7 +2,6 @@ import { FC, FocusEvent, forwardRef, useState } from "react";
 import {
   Box,
   Flex,
-  Input,
   InputGroup,
   InputLeftElement,
   InputProps,
@@ -12,6 +11,7 @@ import {
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { Icon } from "@chakra-ui/react";
 import { TextFieldProps } from "./TextField.d";
+import { Input } from "./TextField.styled";
 
 export const TextField: FC<TextFieldProps> = forwardRef((props, ref) => {
   const [colorIcon, setColorIcon] = useState("#718096");

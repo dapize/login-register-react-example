@@ -1,9 +1,10 @@
 import { FC, forwardRef } from "react";
-import { Checkbox, CheckboxProps } from "@chakra-ui/react";
+import { Checkbox as CheckboxChakra, CheckboxProps } from "@chakra-ui/react";
 
-export const CheckboxRemember: FC<CheckboxProps> = forwardRef((props, ref) => {
+export const Checkbox: FC<CheckboxProps> = forwardRef((propsRaw, ref) => {
+  const { children, ...props } = propsRaw;
   return (
-    <Checkbox
+    <CheckboxChakra
       value="true"
       size="md"
       sx={{
@@ -16,7 +17,7 @@ export const CheckboxRemember: FC<CheckboxProps> = forwardRef((props, ref) => {
       {...props}
       ref={ref}
     >
-      Remember me
-    </Checkbox>
+      {children}
+    </CheckboxChakra>
   );
 });

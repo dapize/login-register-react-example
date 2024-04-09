@@ -3,20 +3,21 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { Box, Button, Text, VStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IconLock, IconMail } from "@tabler/icons-react";
+import { IconLock, IconMail, IconUser } from "@tabler/icons-react";
 import { TextField } from "@components/TextField";
 import { TitleForm } from "@components/TitleForm";
 import { Checkbox } from "@components/Checkbox";
-import { IFormData } from "./LoginForm.d";
-import { LoginFormSchema } from "./LoginForm.schema";
 
-export const LoginForm = () => {
+import { RegisterFormSchema } from "./RegisterForm.schema";
+import { IFormData } from "./RegisterForm.d";
+
+export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormData>({
-    resolver: yupResolver(LoginFormSchema),
+    resolver: yupResolver(RegisterFormSchema),
   });
 
   const onSubmit = (data: IFormData) => {
@@ -36,9 +37,19 @@ export const LoginForm = () => {
       p={7}
     >
       <Box mb={30} as="form" onSubmit={handleSubmit(onSubmit)}>
-        <TitleForm>Login</TitleForm>
+        <TitleForm>Registration</TitleForm>
 
         <VStack spacing={7} mb={5}>
+          <TextField
+            placeholder="Enter your name"
+            type="name"
+            startIcon={IconUser}
+            isInvalid={Boolean(errors.name)}
+            helperText={errors.name?.message}
+            isRequired
+            {...register("name")}
+          />
+
           <TextField
             placeholder="Enter your email"
             type="email"
@@ -50,7 +61,7 @@ export const LoginForm = () => {
           />
 
           <TextField
-            placeholder="Enter your password"
+            placeholder="Create a password"
             type="password"
             startIcon={IconLock}
             isInvalid={Boolean(errors.password)}
@@ -58,10 +69,22 @@ export const LoginForm = () => {
             isRequired
             {...register("password")}
           />
+
+          <TextField
+            placeholder="Confirm the password"
+            type="password"
+            startIcon={IconLock}
+            isInvalid={Boolean(errors.confirmPassword)}
+            helperText={errors.confirmPassword?.message}
+            isRequired
+            {...register("confirmPassword")}
+          />
         </VStack>
 
         <Box mb={8}>
-          <Checkbox {...register("remember")}>Remember me</Checkbox>
+          <Checkbox {...register("terms")}>
+            I accepted all terms and conditions
+          </Checkbox>
         </Box>
 
         <Button
@@ -73,15 +96,15 @@ export const LoginForm = () => {
           // isLoading
           // loadingText="Logging in..."
         >
-          Login
+          Signup
         </Button>
       </Box>
 
       <Box textAlign="center">
         <Text fontSize="sm">
-          Not a member?{" "}
-          <Text as={ReactRouterLink} to="/register" color="blue.500">
-            Signup Now
+          Already a member?{" "}
+          <Text as={ReactRouterLink} to="/login" color="blue.500">
+            Login Now
           </Text>
         </Text>
       </Box>
