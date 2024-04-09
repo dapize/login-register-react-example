@@ -1,24 +1,46 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
     "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "baseUrl": "./src",
+    "types": ["node"],
+    "paths": {
+      "@pages": ["pages"],
+      "@pages/*": ["pages/*"],
+      "@features":["features"],
+      "@features/*":["features/*"],
+      "@components": ["components"],
+      "@components/*": ["components/*"],
+      "@assets":["assets"],
+      "@assets/*":["assets/*"],
+      "@helpers":["helpers"],
+      "@helpers/*":["helpers/*"],
+      "@utils":["utils"],
+      "@utils/*":["utils/*"],
+      "@services":["services"],
+      "@services/*":["services/*"],
+      "@hooks":["hooks"],
+      "@hooks/*":["hooks/*"],
+      "@store":["store"],
+      "@store/*":["store/*"],
+      "@theme":["theme"],
+      "@theme/*":["theme/*"],
+      "@routes":["routes"],
+      "@routes/*":["routes/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

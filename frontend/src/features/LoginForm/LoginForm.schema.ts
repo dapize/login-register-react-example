@@ -1,11 +1,7 @@
-import Joi from "joi";
+import { boolean, object, string } from "yup";
 
-export const LoginFormSchema = Joi.object({
-  email: Joi.string().max(50).email({ tlds: false }).required(),
-  password: Joi.string().alphanum().min(3).max(50).required(),
-  remember: Joi.boolean().optional(),
+export const LoginFormSchema = object({
+  email: string().max(50).email().required("Email is required"),
+  password: string().min(3).max(50).required("Password is required"),
+  remember: boolean().required("Remember is required XD"),
 });
-
-//  password: Joi.string().min(7).required().strict(),
-// confirmPassword: Joi.string().valid(Joi.ref('password')).required().strict()
-// password_confirmation: Joi.any().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } })

@@ -1,11 +1,12 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
+import { Layout } from "@components/Layout";
+import { Home } from "@pages/Home";
+import { Contact } from "@pages/Contact";
+import { Profile } from "@pages/Profile";
+import { NotFound } from "@pages/NotFound";
+import { Login } from "@pages/Login";
+import { About } from "@pages/About";
 import { Private } from "./Private";
-import { Home } from "../pages/Home";
-import { Contact } from "../pages/Contact";
-import { Profile } from "../pages/Profile";
-import { Layout } from "../components/Layout";
-import { NotFound } from "../pages/NotFound";
-import { Login } from "../pages/Login";
 
 export const Routers = () => {
   return (
@@ -13,6 +14,7 @@ export const Routers = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="profile" element={<Private />}>
             <Route index element={<Profile />} />

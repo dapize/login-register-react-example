@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
-import { useUserSession } from "../store/userSession";
 import { Text } from "@chakra-ui/react";
+import { useUserSession } from "@store/userSession";
 
 export const Private = () => {
   const userEmail = useUserSession((state) => state.email);

@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { Box, Button, Text, VStack } from "@chakra-ui/react";
-import { IconMail } from "@tabler/icons-react";
-import { TextField } from "../../components/TextField";
-import { TitleForm } from "../../components/TitleForm";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { IconLock, IconMail } from "@tabler/icons-react";
+import { TextField } from "@components/TextField";
+import { TitleForm } from "@components/TitleForm";
 import { CheckboxRemember } from "./components/CheckboxRemember";
 import { IFormData } from "./LoginForm.d";
-import { joiResolver } from "@hookform/resolvers/joi";
 import { LoginFormSchema } from "./LoginForm.schema";
 
 export const LoginForm = () => {
@@ -15,12 +16,16 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormData>({
-    resolver: joiResolver(LoginFormSchema),
+    resolver: yupResolver(LoginFormSchema),
   });
 
   const onSubmit = (data: IFormData) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    console.log("errors: ", errors);
+  }, [errors]);
 
   return (
     <Box
@@ -47,6 +52,7 @@ export const LoginForm = () => {
           <TextField
             placeholder="Enter your password"
             type="password"
+            startIcon={IconLock}
             isInvalid={Boolean(errors.password)}
             helperText={errors.password?.message}
             isRequired
@@ -64,8 +70,8 @@ export const LoginForm = () => {
           width="100%"
           size="lg"
           sx={{ fontSize: 16 }}
-          isLoading
-          loadingText="Logging in..."
+          // isLoading
+          // loadingText="Logging in..."
         >
           Login
         </Button>
